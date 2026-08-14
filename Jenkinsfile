@@ -68,11 +68,21 @@ pipeline {
                         sh "rm -rf reports"
                     }
 
-                    // Execute JMeter with auto-detected JMX file (한 줄로 작성 -> 로그 확인/재현 용이)
+                    // Execute JMeter with auto-detected JMX file
                     if (isWindows) {
-                        bat "${jmeterCmd} -n -t \"${env.JMX_FILE}\" -l results.jtl -e -o reports"
+                        bat """
+                        ${jmeterCmd} -n ^
+                          -t "${env.JMX_FILE}" ^
+                          -l results.jtl ^
+                          -e -o reports
+                        """
                     } else {
-                        sh "${jmeterCmd} -n -t \"${env.JMX_FILE}\" -l results.jtl -e -o reports"
+                        sh """
+                        ${jmeterCmd} -n \\
+                          -t "${env.JMX_FILE}" \\
+                          -l results.jtl \\
+                          -e -o reports
+                        """
                     }
                 }
             }
