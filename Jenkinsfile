@@ -30,7 +30,7 @@ pipeline {
                         ).trim()
                     } else {
                         jmxFile = bat(
-                            script: 'for %%f in (*.jmx) do @echo %%f',
+                            script: ''@echo off\r\nfor %%f in (*.jmx) do @echo %%f',
                             returnStdout: true
                         ).trim()
                     }
